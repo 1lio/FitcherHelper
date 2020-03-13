@@ -21,7 +21,6 @@ local.properties
 build/
 gradle/
 gradlew
-gradle.properties
 gradlew.bat
 app/libs
 
