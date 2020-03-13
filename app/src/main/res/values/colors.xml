@@ -12,6 +12,7 @@
     <color name="color_white">#FFFFFF</color>
 
     <color name="color_icon_tint">#FFC107</color>
+    <color name="yellow">#FFC107</color>
 
     <color name="color_divider_dark">#1F000000</color>
     <color name="color_divider_light">#1FFFFFFF</color>

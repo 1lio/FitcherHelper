@@ -4,4 +4,8 @@
     <string name="graph_pressure">График изменения давления</string>
     <string name="weater_week">Прогноз погоды</string>
     <string name="weather_provider">Прогноз от gismeteo.ru</string>
+    <string name="pressure">Давление</string>
+    <string name="humidity">Влажность</string>
+    <string name="cloudiness">Облачность</string>
+    <string name="sunrise_sunset">Восход | Заход</string>
 </resources>

@@ -23,7 +23,7 @@ class WeatherAdapter : BaseAdapter<WeatherItem, WeatherAdapter.ViewHolder>() {
     inner class ViewHolder(v: View) : BaseViewHolder<WeatherItem>(v) {
 
         val icon: AppCompatImageView = itemView.findViewById(R.id.icon)
-        val temperature: TextView = itemView.findViewById(R.id.temperature)
+        val temperature: TextView = itemView.findViewById(R.id.txtTemperature)
         val day: TextView = itemView.findViewById(R.id.day)
 
         override fun bind(item: WeatherItem) {
