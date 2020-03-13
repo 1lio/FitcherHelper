@@ -63,6 +63,27 @@
         app:layout_goneMarginTop="@dimen/spacing_normal">
 
         <TextView
+            android:id="@+id/text_weather2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:text="Погода на сегодня"
+            android:textAlignment="viewStart" />
+
+        <include
+            layout="@layout/main_inform"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:id="@+id/divider6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:background="@color/color_gray_light" />
+
+        <TextView
             android:id="@+id/text_weather"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,7 +94,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_weather"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_marginBottom="6dp"
             android:orientation="horizontal"
             android:scrollbars="none"
@@ -93,7 +114,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="6dp"
-            android:background="?android:attr/listDivider" />
+            android:background="@color/color_gray_light" />
 
 
         <HorizontalScrollView
