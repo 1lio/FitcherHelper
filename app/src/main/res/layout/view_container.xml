@@ -17,6 +17,20 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="График изменения давления" />
 
+    <ImageView
+        android:id="@+id/btnHide"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="8dp"
+        android:tint="@color/color_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/nameBlock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/nameBlock"
+        app:layout_constraintTop_toTopOf="@+id/nameBlock"
+        app:srcCompat="@drawable/ic_arrow_down"
+        tools:ignore="ContentDescription" />
+
     <View
         android:id="@+id/divider4"
         android:layout_width="409dp"
