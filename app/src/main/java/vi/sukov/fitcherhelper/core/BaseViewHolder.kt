@@ -1,9 +1,8 @@
-package vi.sukov.fitcherhelper
+package vi.sukov.fitcherhelper.core
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-/** Базовый ViewHolder */
 abstract class BaseViewHolder<T>( itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun setOnClickListener(listener: View.OnClickListener) {
@@ -11,5 +10,4 @@ abstract class BaseViewHolder<T>( itemView: View) : RecyclerView.ViewHolder(item
     }
 
     abstract fun bind(item: T)
-
 }

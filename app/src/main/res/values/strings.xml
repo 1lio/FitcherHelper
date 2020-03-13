@@ -3,4 +3,5 @@
     <string name="search_hint">Елец. Липецкая обл.</string>
     <string name="graph_pressure">График изменения давления</string>
     <string name="weater_week">Прогноз погоды</string>
+    <string name="weather_provider">Прогноз от gismeteo.ru</string>
 </resources>

@@ -1,4 +1,4 @@
-package vi.sukov.fitcherhelper
+package vi.sukov.fitcherhelper.features.weather
 
 data class WeatherItem(
 

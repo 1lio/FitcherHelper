@@ -1,4 +1,4 @@
-package vi.sukov.fitcherhelper
+package vi.sukov.fitcherhelper.features.weather
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
+import vi.sukov.fitcherhelper.R
+import vi.sukov.fitcherhelper.core.BaseAdapter
+import vi.sukov.fitcherhelper.core.BaseViewHolder
 
 class WeatherAdapter : BaseAdapter<WeatherItem, WeatherAdapter.ViewHolder>() {
 

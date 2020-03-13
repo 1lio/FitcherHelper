@@ -55,12 +55,11 @@
         android:orientation="vertical"
         android:padding="16dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout"
-        app:layout_constraintVertical_bias="0.0"
         app:layout_goneMarginTop="@dimen/spacing_normal">
 
         <TextView
@@ -114,20 +113,27 @@
             </LinearLayout>
         </HorizontalScrollView>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Прогноз от gismeteo.ru" />
     </LinearLayout>
 
-    <vi.sukov.fitcherhelper.view.BottomBar
-        android:id="@+id/bottom_bar"
-        style="@style/Widget.MaterialComponents.BottomAppBar"
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_marginBottom="16dp"
+        android:text="@string/weather_provider"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

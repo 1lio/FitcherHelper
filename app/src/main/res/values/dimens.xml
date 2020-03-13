@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="icon_size">24dp</dimen>
+    <dimen name="icon_size">18dp</dimen>
     <!-- font sizes -->
     <dimen name="font_large">18sp</dimen>
     <dimen name="font_normal">16sp</dimen>
