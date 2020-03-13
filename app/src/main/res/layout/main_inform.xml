@@ -20,7 +20,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.205"
-        app:srcCompat="@drawable/ic_c3" />
+        app:srcCompat="@drawable/ic_c3"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/txtTemperature"
@@ -36,7 +37,7 @@
         tools:text="+20 | +7" />
 
     <ImageView
-        android:id="@+id/directionWind"
+        android:id="@+id/iconDirWind"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:rotation="-45"
@@ -47,7 +48,8 @@
         app:layout_constraintStart_toEndOf="@+id/iconWeather"
         app:layout_constraintTop_toTopOf="@+id/iconWeather"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/ic_arrow" />
+        app:srcCompat="@drawable/ic_arrow"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/textView4"
@@ -111,47 +113,47 @@
         tools:background="@color/color_gray_light" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/txtPressure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="751.6 мм рт.с."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.7"
         app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="@+id/textView4" />
+        app:layout_constraintTop_toTopOf="@+id/textView4"
+        tools:text="751.6 мм рт.с." />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/txtHumidity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="46%"
-        app:layout_constraintEnd_toEndOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="@+id/txtPressure"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintStart_toStartOf="@+id/txtPressure"
+        app:layout_constraintTop_toBottomOf="@+id/txtPressure"
+        tools:text="46%" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/txtCloudiness"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="0%"
-        app:layout_constraintEnd_toEndOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="@+id/txtHumidity"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintStart_toStartOf="@+id/txtHumidity"
+        app:layout_constraintTop_toBottomOf="@+id/txtHumidity"
+        tools:text="0%" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/txtSunriseSunset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView10"
+        app:layout_constraintEnd_toEndOf="@+id/txtCloudiness"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="@+id/txtPressure"
+        app:layout_constraintTop_toBottomOf="@+id/txtCloudiness"
         app:layout_constraintVertical_bias="0.0"
         tools:text="06:44 | 18:26" />
 
@@ -160,8 +162,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/color_primary"
-        app:layout_constraintEnd_toEndOf="@+id/directionWind"
-        app:layout_constraintStart_toStartOf="@+id/directionWind"
+        app:layout_constraintEnd_toEndOf="@+id/iconDirWind"
+        app:layout_constraintStart_toStartOf="@+id/iconDirWind"
         app:layout_constraintTop_toTopOf="@+id/txtTemperature"
         tools:text="ЮЗ" />
 
@@ -171,7 +173,7 @@
         android:layout_height="0dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/directionWind"
+        app:layout_constraintEnd_toStartOf="@+id/iconDirWind"
         app:layout_constraintStart_toEndOf="@+id/iconWeather"
         app:layout_constraintTop_toTopOf="parent"
         tools:background="@color/color_gray_light" />
