@@ -24,11 +24,11 @@ class MainAdapter : BaseAdapter<MainItem, MainAdapter.ViewHolder>() {
     inner class ViewHolder(v: View) : BaseViewHolder<MainItem>(v) {
 
         val txtName: TextView = itemView.findViewById(R.id.txtNameBlock)
-        val fragment: Fragment = itemView.findViewById(R.id.fragmentBlock)
+       // val fragment: Fragment = itemView.findViewById(R.id.fragmentBlock)
 
         override fun bind(item: MainItem) {
             txtName.text = item.name
-            fragment.childFragmentManager.beginTransaction().replace(R.id.fragmentBlock, item.fragment)
+           // fragment.childFragmentManager.beginTransaction().replace(R.id.fragmentBlock, item.fragment)
         }
     }
 }
