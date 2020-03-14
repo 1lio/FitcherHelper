@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_primary"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity2">
 
     <vi.sukov.fitcherhelper.features.location.LocationView
         android:id="@+id/frameLayout"

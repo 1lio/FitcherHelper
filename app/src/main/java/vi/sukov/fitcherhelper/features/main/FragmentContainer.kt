@@ -8,7 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import kotlinx.android.synthetic.main.view_container.view.*
-import vi.sukov.fitcherhelper.MainActivity
+import vi.sukov.fitcherhelper.MainActivity2
 import vi.sukov.fitcherhelper.R
 
 class FragmentContainer : ConstraintLayout {
@@ -25,7 +25,7 @@ class FragmentContainer : ConstraintLayout {
         this.fm = fm
     }
 
-    val activity = context as MainActivity
+    val activity = context as MainActivity2
 
     var isHideBlock: Boolean = false
 
