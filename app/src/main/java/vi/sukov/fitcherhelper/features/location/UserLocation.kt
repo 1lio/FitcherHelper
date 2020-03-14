@@ -14,8 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 
-
-class UserLocation(val context: Context) : LocationListener {
+class UserLocation(private val context: Context) : LocationListener {
 
     companion object {
         private const val MIN_DISTANCE_CHANGE_FOR_UPDATES: Float = 10f
@@ -24,14 +23,14 @@ class UserLocation(val context: Context) : LocationListener {
 
     private var checkGPS: Boolean = false
     private var checkNetwork: Boolean = false
-     var canGetLocation: Boolean = false
+    var canGetLocation: Boolean = false
 
-     lateinit var loc: Location
+    lateinit var loc: Location
     private var locManager: LocationManager =
         context.getSystemService(LOCATION_SERVICE) as LocationManager
 
-     var latitude: Double = 0.0
-     var longitude: Double = 0.0
+    var latitude: Double = 0.0
+    var longitude: Double = 0.0
 
     init {
 
@@ -59,21 +58,14 @@ class UserLocation(val context: Context) : LocationListener {
                             Manifest.permission.ACCESS_COARSE_LOCATION
                         )
                         != PackageManager.PERMISSION_GRANTED
-                    ) {
-
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
-                    }
-
-                    locManager.requestLocationUpdates(
-                        LocationManager.GPS_PROVIDER,
-                        MIN_TIME_BW_UPDATES,
-                        MIN_DISTANCE_CHANGE_FOR_UPDATES,
-                        this
                     )
+
+                        locManager.requestLocationUpdates(
+                            LocationManager.GPS_PROVIDER,
+                            MIN_TIME_BW_UPDATES,
+                            MIN_DISTANCE_CHANGE_FOR_UPDATES,
+                            this
+                        )
 
                     loc = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                     latitude = loc.latitude
@@ -89,39 +81,24 @@ class UserLocation(val context: Context) : LocationListener {
         val alertDialog: AlertDialog.Builder = AlertDialog.Builder(context)
         alertDialog.setTitle("GPS is not Enabled!")
         alertDialog.setMessage("Do you want to turn on GPS?")
-        alertDialog.setPositiveButton(
-            "Yes"
-        ) { _, _ ->
+        alertDialog.setPositiveButton("Yes") { _, _ ->
             val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
             context.startActivity(intent)
         }
-        alertDialog.setNegativeButton(
-            "No"
-        ) { dialog, _ -> dialog.cancel() }
+        alertDialog.setNegativeButton("No") { dialog, _ -> dialog.cancel() }
         alertDialog.show()
     }
 
     fun stopListener() {
-        if (locManager != null) {
-            if (ActivityCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return
-            }
-            locManager.removeUpdates(this)
-        }
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ) return
+
+        locManager.removeUpdates(this)
     }
 
     override fun onLocationChanged(location: Location?) {}
