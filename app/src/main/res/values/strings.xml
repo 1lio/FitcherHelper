@@ -8,4 +8,6 @@
     <string name="humidity">Влажность</string>
     <string name="cloudiness">Облачность</string>
     <string name="sunrise_sunset">Восход | Заход</string>
+
+    <string name="search_location">Поиск местоположения…</string>
 </resources>

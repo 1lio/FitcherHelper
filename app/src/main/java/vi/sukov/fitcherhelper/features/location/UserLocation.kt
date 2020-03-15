@@ -1,80 +1,121 @@
 package vi.sukov.fitcherhelper.features.location
 
-import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Context.LOCATION_SERVICE
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
-import android.widget.Toast
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
 
-class UserLocation(private val context: Context) : LocationListener {
+class UserLocation(private val  context: Context) : LocationListener {
 
-    companion object {
-        private const val MIN_DISTANCE_CHANGE_FOR_UPDATES: Float = 10f
-        private const val MIN_TIME_BW_UPDATES: Long = 1000 * 60 * 1
-    }
+    // flag for GPS status
+    private var isGPSEnabled = false
 
-    private var checkGPS: Boolean = false
-    private var checkNetwork: Boolean = false
-    var canGetLocation: Boolean = false
+    // flag for network status
+    private var isNetworkEnabled = false
+    private var canGetLocation = false
+    private var location: Location? = null
+    private var latitude = 0.0
+    private var longitude = 0.0
 
-    lateinit var loc: Location
-    private var locManager: LocationManager =
-        context.getSystemService(LOCATION_SERVICE) as LocationManager
+    // Declaring a Location Manager
+    private var locationManager: LocationManager? = null
 
-    var latitude: Double = 0.0
-    var longitude: Double = 0.0
-
-    init {
-
-        // GPS Status
-        checkGPS = locManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-
-        // Network status
-        checkNetwork = locManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-
+    @SuppressLint("MissingPermission")
+    fun getLocation(): Location? {
         try {
+            locationManager = context.getSystemService(LOCATION_SERVICE) as LocationManager?
 
-            if (!checkGPS && !checkNetwork) {
-                Toast.makeText(context, "No Service Provider is available", Toast.LENGTH_SHORT)
-                    .show()
+            // getting GPS status
+            isGPSEnabled = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
+
+            // getting network status
+            isNetworkEnabled = locationManager!!.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+            if (!isGPSEnabled && !isNetworkEnabled) {
+                // no network provider is enabled
             } else {
                 canGetLocation = true
 
-                if (checkGPS) {
-                    if (ActivityCompat.checkSelfPermission(
-                            context,
-                            Manifest.permission.ACCESS_FINE_LOCATION
-                        )
-                        != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                            context,
-                            Manifest.permission.ACCESS_COARSE_LOCATION
-                        )
-                        != PackageManager.PERMISSION_GRANTED
-                    )
-
-                        locManager.requestLocationUpdates(
+                // if GPS Enabled get lat/long using GPS Services
+                if (isGPSEnabled) {
+                    Log.i("GPS", "from gps")
+                    if (location == null) {
+                        locationManager!!.requestLocationUpdates(
                             LocationManager.GPS_PROVIDER,
-                            MIN_TIME_BW_UPDATES,
-                            MIN_DISTANCE_CHANGE_FOR_UPDATES,
-                            this
+                            MIN_TIME_BY_UPDATES,
+                            MIN_DISTANCE_CHANGE_FOR_UPDATES.toFloat(), this
                         )
-
-                    loc = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                    latitude = loc.latitude
-                    longitude = loc.longitude
+                        Log.d("GPS Enabled", "GPS Enabled")
+                        if (locationManager != null) {
+                            location =
+                                locationManager!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                            if (location != null) {
+                                latitude = location!!.latitude
+                                longitude = location!!.longitude
+                            }
+                        }
+                    }
+                }
+                // second get location from Network Provider
+                if (isNetworkEnabled) {
+                    Log.i("GPS", "from net")
+                    locationManager!!.requestLocationUpdates(
+                        LocationManager.NETWORK_PROVIDER,
+                        MIN_TIME_BY_UPDATES,
+                        MIN_DISTANCE_CHANGE_FOR_UPDATES.toFloat(), this
+                    )
+                    Log.d("Network", "Network")
+                    if (locationManager != null) {
+                        location =
+                            locationManager!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                        if (location != null) {
+                            latitude = location!!.latitude
+                            longitude = location!!.longitude
+                        }
+                    }
                 }
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
+        return location
+    }
+
+
+    override fun onLocationChanged(location: Location) {
+    /*    this.location = location
+        val ed: Editor = MainActivity.getSPref().edit()
+        ed.putFloat("lat", location.getLatitude() as Float)
+        ed.putFloat("lon", location.getLongitude() as Float)
+        ed.commit()*/
+    }
+
+
+    override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
+
+    override fun onProviderEnabled(provider: String) {}
+
+    override fun onProviderDisabled(provider: String) {}
+
+    fun getLatitude(): Double {
+        if (location != null) latitude = location!!.latitude
+        return latitude
+    }
+
+
+    fun getLongitude(): Double {
+        if (location != null) longitude = location!!.longitude
+        return longitude
+    }
+
+    fun stopUsingGPS() {
+        if (locationManager != null) locationManager!!.removeUpdates(this@UserLocation)
     }
 
     fun showSettingsAlert() {
@@ -82,31 +123,22 @@ class UserLocation(private val context: Context) : LocationListener {
         alertDialog.setTitle("GPS is not Enabled!")
         alertDialog.setMessage("Do you want to turn on GPS?")
         alertDialog.setPositiveButton("Yes") { _, _ ->
-            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-            context.startActivity(intent)
+            context.startActivity( Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
         }
         alertDialog.setNegativeButton("No") { dialog, _ -> dialog.cancel() }
         alertDialog.show()
     }
 
-    fun stopListener() {
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                context,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            )
-            != PackageManager.PERMISSION_GRANTED
-        ) return
+    fun canGetLocation() = canGetLocation
 
-        locManager.removeUpdates(this)
+    companion object {
+
+        // The minimum distance to change Updates in meters
+        private const val MIN_DISTANCE_CHANGE_FOR_UPDATES: Long = 5 // 5 meters
+
+        // The minimum time between updates in milliseconds
+        private const val MIN_TIME_BY_UPDATES: Long = 1000
     }
 
-    override fun onLocationChanged(location: Location?) {}
-
-    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
-
-    override fun onProviderEnabled(provider: String?) {}
-
-    override fun onProviderDisabled(provider: String?) {}
-
+    init { getLocation() }
 }

@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import vi.sukov.fitcherhelper.R
-import vi.sukov.fitcherhelper.core.BaseAdapter
-import vi.sukov.fitcherhelper.core.BaseViewHolder
+import vi.sukov.fitcherhelper.core.base.BaseAdapter
+import vi.sukov.fitcherhelper.core.base.BaseViewHolder
 
 class WeatherAdapter : BaseAdapter<WeatherItem, WeatherAdapter.ViewHolder>() {
 

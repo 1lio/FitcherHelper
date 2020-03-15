@@ -8,7 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import kotlinx.android.synthetic.main.view_container.view.*
-import vi.sukov.fitcherhelper.MainActivity2
+import vi.sukov.fitcherhelper.MainActivity
 import vi.sukov.fitcherhelper.R
 
 class FragmentContainer : ConstraintLayout {
@@ -21,11 +21,8 @@ class FragmentContainer : ConstraintLayout {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attr: AttributeSet) : super(context, attr)
-    constructor(context: Context, attr: AttributeSet, fm: FragmentManager) : super(context, attr) {
-        this.fm = fm
-    }
 
-    val activity = context as MainActivity2
+    val activity = context as MainActivity
 
     var isHideBlock: Boolean = false
 
@@ -41,23 +38,6 @@ class FragmentContainer : ConstraintLayout {
             Log.d(TAG, "btnHideClick")
         }
 
-    }
-
-    private fun wrapBlock() {
-
-        // Сворачиваем / Разворачиваем блок в зависимости от состояния
-
-        if (isHideBlock) {
-
-        } else {
-
-        }
-
-        isHideBlock = !this.isHideBlock
-    }
-
-    fun setFragment(fragment: Fragment) {
-        fm
     }
 
 }

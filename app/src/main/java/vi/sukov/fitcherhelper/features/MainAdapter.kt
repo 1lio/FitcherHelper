@@ -5,10 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import vi.sukov.fitcherhelper.R
-import vi.sukov.fitcherhelper.core.BaseAdapter
-import vi.sukov.fitcherhelper.core.BaseViewHolder
+import vi.sukov.fitcherhelper.core.base.BaseAdapter
+import vi.sukov.fitcherhelper.core.base.BaseViewHolder
 import vi.sukov.fitcherhelper.features.main.MainItem
 
 class MainAdapter : BaseAdapter<MainItem, MainAdapter.ViewHolder>() {

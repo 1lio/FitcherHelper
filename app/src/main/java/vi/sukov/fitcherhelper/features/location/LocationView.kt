@@ -3,6 +3,7 @@ package vi.sukov.fitcherhelper.features.location
 import android.content.Context
 import android.location.Geocoder
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.location_view.view.*
 import vi.sukov.fitcherhelper.MainActivity
 import vi.sukov.fitcherhelper.R
+import vi.sukov.fitcherhelper.core.repository.LocalRepository
 import java.util.*
 
 class LocationView : LinearLayout {
@@ -19,29 +21,62 @@ class LocationView : LinearLayout {
 
     private val activity = context as MainActivity
     private val viewModel = ViewModelProvider(activity)[LocationViewModel::class.java]
-    private val userLocation: UserLocation = UserLocation(activity)
+    private val repository = LocalRepository(activity)
+    private val userLocation = UserLocation(context)
 
     init {
         LayoutInflater.from(context).inflate(R.layout.location_view, this)
         viewModel.observeLocationName(activity, Observer { txtLocation.text = it })
 
+        checkLocation()
+
         this.setOnClickListener {
+            checkLocation()
+        }
 
-            val geocoder = Geocoder(activity, Locale.ENGLISH)
+    }
 
-            val latitude: Double = userLocation.latitude
-            val longitude: Double = userLocation.longitude
-            val location = geocoder.getFromLocation(latitude, longitude, 1)
+    private fun checkLocation() {
 
-            if (userLocation.canGetLocation) {
+        val isEmptyLocation: Boolean = repository.getLocation() == LOADING
 
-                viewModel.setLocationName("${location[0].locality}, ${location[0].adminArea}")
+        if (isEmptyLocation) {
+
+            // Кидаем сообщение о поиске мета
+            viewModel.setLocationName(context.getString(R.string.search_location))
+
+            if (userLocation.canGetLocation()) {
+
+                // При наличии прав грузим локацию, иначе просим права
+                viewModel.setLocationName(getLocationName())
 
             } else {
-                userLocation.showSettingsAlert()
+               // userLocation.showSettingsAlert()
             }
-
         }
     }
 
+    private fun getLocationName(): String {
+        val geocoder = Geocoder(activity, Locale.ENGLISH)
+
+        val latitude: Double = userLocation.getLatitude()
+        val longitude: Double = userLocation.getLongitude()
+
+        val location = geocoder.getFromLocation(latitude, longitude, 1)
+
+        return try {
+            Log.d("LOCATION", location.toString())
+            "${location[0].locality}, ${location[0].adminArea}"
+
+        } catch (e: Exception) {
+
+            e.printStackTrace()
+           // userLocation.showSettingsAlert()
+            context.getString(R.string.search_location)
+        }
+    }
+
+    private companion object {
+        const val LOADING = "Loading..."
+    }
 }

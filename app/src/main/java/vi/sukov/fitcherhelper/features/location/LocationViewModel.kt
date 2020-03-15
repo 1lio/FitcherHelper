@@ -9,7 +9,6 @@ class LocationViewModel : ViewModel() {
 
     private val locationName = MutableLiveData<String>()
 
-
     init {
         locationName.value = "Search location..."
     }

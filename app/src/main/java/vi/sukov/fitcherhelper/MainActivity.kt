@@ -3,12 +3,11 @@ package vi.sukov.fitcherhelper
 import android.Manifest.permission
 import android.annotation.TargetApi
 import android.content.DialogInterface
-import android.content.pm.PackageManager
+import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import vi.sukov.fitcherhelper.features.location.UserLocation
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -16,7 +15,6 @@ class MainActivity : AppCompatActivity() {
     private var permissionsToRequest: ArrayList<String> = arrayListOf()
     private val permissionsRejected: ArrayList<String> = arrayListOf()
     private val permissions = ArrayList<String>()
-    private var locationTrack: UserLocation? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         permissions.add(permission.ACCESS_FINE_LOCATION)
         permissions.add(permission.ACCESS_COARSE_LOCATION)
+
         permissionsToRequest = findUnAskedPermissions(permissions)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -35,13 +34,10 @@ class MainActivity : AppCompatActivity() {
     private fun findUnAskedPermissions(wanted: ArrayList<String>): ArrayList<String> {
         val result = ArrayList<String>()
         for (perm in wanted) if (hasPermission(perm)) result.add(perm)
-
         return result
     }
 
-    private fun hasPermission(permission: String) =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED else false
-
+    private fun hasPermission(permission: String) = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) checkSelfPermission(permission) != PERMISSION_GRANTED else false
 
     @TargetApi(Build.VERSION_CODES.M)
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -55,13 +51,7 @@ class MainActivity : AppCompatActivity() {
             if (permissionsRejected.size > 0 ) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (shouldShowRequestPermissionRationale((permissionsRejected[0]))) {
-                        showMessageOKCancel(
-                            DialogInterface.OnClickListener { _, _ ->
-                                requestPermissions(
-                                    (permissionsRejected.toTypedArray()),
-                                    ALL_PERMISSIONS_RESULT
-                                )
-                            })
+                        showMessageOKCancel(DialogInterface.OnClickListener { _, _ -> requestPermissions((permissionsRejected.toTypedArray()), ALL_PERMISSIONS_RESULT) })
                     }
                 }
             }
@@ -75,11 +65,6 @@ class MainActivity : AppCompatActivity() {
             .setNegativeButton("Cancel", null)
             .create()
             .show()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        locationTrack!!.stopListener()
     }
 
     companion object {

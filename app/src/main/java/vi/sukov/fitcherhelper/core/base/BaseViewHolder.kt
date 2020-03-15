@@ -1,4 +1,4 @@
-package vi.sukov.fitcherhelper.core
+package vi.sukov.fitcherhelper.core.base
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
