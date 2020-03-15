@@ -5,7 +5,10 @@ import android.location.Geocoder
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
+import android.widget.FrameLayout
 import android.widget.LinearLayout
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.location_view.view.*
@@ -13,6 +16,7 @@ import vi.sukov.fitcherhelper.MainActivity
 import vi.sukov.fitcherhelper.R
 import vi.sukov.fitcherhelper.core.repository.LocalRepository
 import java.util.*
+
 
 class LocationView : LinearLayout {
 
@@ -30,10 +34,21 @@ class LocationView : LinearLayout {
 
         checkLocation()
 
-        this.setOnClickListener {
-            checkLocation()
-        }
+        val frameView = FrameLayout(context)
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+            .setTitle("My title")
+            .setMessage("Enter password")
+            .setView(frameView)
 
+        val alertDialog: AlertDialog = builder.create()
+
+        val inflater: LayoutInflater = alertDialog.layoutInflater
+        val dialoglayout: View = inflater.inflate(R.layout.alert_map, frameView)
+
+
+        this.setOnClickListener {
+            alertDialog.show()
+        }
     }
 
     private fun checkLocation() {
@@ -51,7 +66,7 @@ class LocationView : LinearLayout {
                 viewModel.setLocationName(getLocationName())
 
             } else {
-               // userLocation.showSettingsAlert()
+                // userLocation.showSettingsAlert()
             }
         }
     }
@@ -71,7 +86,7 @@ class LocationView : LinearLayout {
         } catch (e: Exception) {
 
             e.printStackTrace()
-           // userLocation.showSettingsAlert()
+            // userLocation.showSettingsAlert()
             context.getString(R.string.search_location)
         }
     }
