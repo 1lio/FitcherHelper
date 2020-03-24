@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainActivity"
+    tools:ignore="UnusedNavigation">
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="vi.sukov.fitcherhelper.MainActivity"
+        android:label="activity"
+        tools:layout="@layout/activity" />
+
+    <fragment
+        android:id="@+id/mainFragment"
+        tools:layout="@layout/item_weather"
+        android:name="vi.sukov.fitcherhelper.features.main.MainFragment"
+        android:label="MainFragment" />
+
+    <fragment
+        android:id="@+id/mainInformation"
+        tools:layout="@layout/main_inform"
+        android:name="vi.sukov.fitcherhelper.features.MainInformation"
+        android:label="MainInformation" />
+
+    <fragment
+        android:id="@+id/weatherFragment"
+        android:name="vi.sukov.fitcherhelper.features.weather.WeatherFragment"
+        android:label="WeatherFragment" />
+</navigation>

@@ -17,7 +17,6 @@ import vi.sukov.fitcherhelper.R
 import vi.sukov.fitcherhelper.core.repository.LocalRepository
 import java.util.*
 
-
 class LocationView : LinearLayout {
 
     constructor(context: Context) : super(context)
@@ -32,25 +31,25 @@ class LocationView : LinearLayout {
         LayoutInflater.from(context).inflate(R.layout.location_view, this)
         viewModel.observeLocationName(activity, Observer { txtLocation.text = it })
 
-        checkLocation()
+       // checkLocation()
 
-        val frameView = FrameLayout(context)
+    /*    val frameView = FrameLayout(context)
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
             .setTitle("My title")
             .setMessage("Enter password")
             .setView(frameView)
 
-        val alertDialog: AlertDialog = builder.create()
+        val alertDialog: AlertDialog = builder.create()*/
 
-        val inflater: LayoutInflater = alertDialog.layoutInflater
-        val dialoglayout: View = inflater.inflate(R.layout.alert_map, frameView)
+      //  val inflater: LayoutInflater = alertDialog.layoutInflater
+      //  val dialoglayout: View = inflater.inflate(R.layout.alert_map, frameView)
 
 
-        this.setOnClickListener {
+     /*   this.setOnClickListener {
             alertDialog.show()
-        }
+        }*/
     }
-
+/*
     private fun checkLocation() {
 
         val isEmptyLocation: Boolean = repository.getLocation() == LOADING
@@ -93,5 +92,5 @@ class LocationView : LinearLayout {
 
     private companion object {
         const val LOADING = "Loading..."
-    }
+    }*/
 }
