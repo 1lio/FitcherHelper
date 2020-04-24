@@ -9,7 +9,8 @@
     android:background="@drawable/bg_search"
     android:orientation="horizontal">
 
-    <TextView
+    <EditText
+        android:inputType="textNoSuggestions"
         android:id="@+id/txtLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

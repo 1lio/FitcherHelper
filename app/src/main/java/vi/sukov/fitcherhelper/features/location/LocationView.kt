@@ -29,25 +29,25 @@ class LocationView : LinearLayout {
 
     init {
         LayoutInflater.from(context).inflate(R.layout.location_view, this)
-        viewModel.observeLocationName(activity, Observer { txtLocation.text = it })
+        viewModel.observeLocationName(activity, Observer { txtLocation.setText(it) })
 
-       // checkLocation()
+        // checkLocation()
 
-    /*    val frameView = FrameLayout(context)
-        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
-            .setTitle("My title")
-            .setMessage("Enter password")
-            .setView(frameView)
+        /*    val frameView = FrameLayout(context)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+                .setTitle("My title")
+                .setMessage("Enter password")
+                .setView(frameView)
 
-        val alertDialog: AlertDialog = builder.create()*/
+            val alertDialog: AlertDialog = builder.create()*/
 
-      //  val inflater: LayoutInflater = alertDialog.layoutInflater
-      //  val dialoglayout: View = inflater.inflate(R.layout.alert_map, frameView)
+        //  val inflater: LayoutInflater = alertDialog.layoutInflater
+        //  val dialoglayout: View = inflater.inflate(R.layout.alert_map, frameView)
 
 
-     /*   this.setOnClickListener {
-            alertDialog.show()
-        }*/
+        /*   this.setOnClickListener {
+               alertDialog.show()
+           }*/
     }
 /*
     private fun checkLocation() {
