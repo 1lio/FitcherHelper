@@ -22,9 +22,9 @@ class WeatherAdapter : BaseAdapter<WeatherItem, WeatherAdapter.ViewHolder>() {
 
     inner class ViewHolder(v: View) : BaseViewHolder<WeatherItem>(v) {
 
-        val icon: AppCompatImageView = itemView.findViewById(R.id.icon)
-        val temperature: TextView = itemView.findViewById(R.id.txtTemperature)
-        val day: TextView = itemView.findViewById(R.id.day)
+        private val icon: AppCompatImageView = itemView.findViewById(R.id.icon)
+        private val temperature: TextView = itemView.findViewById(R.id.txtTemperature)
+        private val day: TextView = itemView.findViewById(R.id.day)
 
         override fun bind(item: WeatherItem) {
             icon.setImageResource(R.drawable.ic_c3)

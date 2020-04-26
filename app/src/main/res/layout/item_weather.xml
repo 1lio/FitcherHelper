@@ -10,12 +10,12 @@
     app:cardElevation="2dp">
 
     <LinearLayout
-        android:padding="6dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="6dp">
 
         <ImageView
             android:id="@+id/icon"
@@ -23,7 +23,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/ic_c3" />
+            app:srcCompat="@drawable/ic_c3"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/txtTemperature"

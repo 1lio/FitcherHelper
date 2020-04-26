@@ -4,21 +4,23 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import vi.sukov.fitcherhelper.core.repository.FakeRepository
 
 class LocationViewModel : ViewModel() {
 
     private val locationName = MutableLiveData<String>()
+    private val repository = FakeRepository()
 
     init {
-        locationName.value = "Search location..."
+        locationName.value = repository.getLocation()
     }
 
-    fun observeLocationName(owner: LifecycleOwner, observer: Observer<String>){
+    fun observeLocationName(owner: LifecycleOwner, observer: Observer<String>) {
         locationName.observe(owner, observer)
     }
 
 
-    fun setLocationName(name: String){
+    fun setLocationName(name: String) {
         locationName.value = name
     }
 
