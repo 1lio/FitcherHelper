@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CustomGraph">
+        <attr name="pointApex" format="boolean" />
+        <attr name="averageLine" format="boolean" />
+        <attr name="maxLine" format="boolean" />
+        <attr name="minLine" format="boolean" />
+
+        <attr name="maxLineColor" format="color" />
+        <attr name="minLineColor" format="color" />
+        <attr name="averageLineColor" format="color" />
+        <attr name="pointColor" format="color" />
+        <attr name="railsColor" format="color" />
+        <attr name="indexesColor" format="color" />
+
+        <attr name="gradientRes" format="reference"/>
+
+    </declare-styleable>
+
+</resources>
