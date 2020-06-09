@@ -1,2 +1,2 @@
-include ":app", ":graphdance"
+include ":app"
 rootProject.name="FitcherHelper"

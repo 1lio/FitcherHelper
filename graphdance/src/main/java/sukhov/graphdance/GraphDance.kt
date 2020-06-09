@@ -1,2 +1,0 @@
-package sukhov.graphdance
-
